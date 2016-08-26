@@ -13,8 +13,9 @@
 	<link rel="stylesheet" type="text/css" href="css/estilo.css">
 	<link rel="stylesheet" type="text/css" href="css/animacion.css">
 
-
+<!-- 1- Necesario para que funcione angular.js tener la carpeta bower component y trabajar si coneccion -->
 	<script SRC="bower_components/angular/angular.min.js" TYPE="text/javascript"></script>
+<!-- 2- es necesario p que funcione el archivo js con la aplicacion, los controler, etc -->
  	<script SRC="js/app.js" TYPE="text/javascript"></script>
 </head>
 <body ng-app="ABMangularPHP" ng-controller="controlAlta">
@@ -50,14 +51,14 @@
 			<center> <h1>Datos {{DatoTest}}</h1>   </center>     
 		</div>
 		<div class="CajaInicio animated bounceInRight">
-			<h1> <!--?php echo $titulo; ?-->titulo </h1>
+			<h1> <!--?php echo $titulo; ?--> {{mascota}}</h1>
 
 			<form id="FormIngreso"  enctype="multipart/form-data" >
-				<input type="text" name="apellido" ng-model="persona.apellido" placeholder="ingrese apellido" value="" />
+				<input type="text" name="apellido" ng-model="mascota.raza" placeholder="ingrese raza" value="" />
 				<span id="lblApellido" style="display:none;color:#FF0000;width:1%;float:right;font-size:80">*
 				</span>
-				<input type="text" name="nombre" ng-model="persona.nombre" placeholder="ingrese nombre" value="" /> <span id="lblNombre" style="display:none;color:#FF0000;width:1%;float:right;font-size:80">*</span>
-				<input type="text" name="dni" ng-model="persona.dni" placeholder="ingrese dni" value=""     /> 
+				<input type="text" name="nombre" ng-model="mascota.nombre" placeholder="ingrese nombre" value="" /> <span id="lblNombre" style="display:none;color:#FF0000;width:1%;float:right;font-size:80">*</span>
+				<input type="text" name="dni" ng-model="mascota.edad" placeholder="ingrese edad" value=""     /> 
 				<span id="lblDni" style="display:none;color:#FF0000;width:1%;float:right;font-size:80">*</span>
 				<p style='color: black;'>*El DNI no se puede modificar.</p> ": "" ; ?>
 				

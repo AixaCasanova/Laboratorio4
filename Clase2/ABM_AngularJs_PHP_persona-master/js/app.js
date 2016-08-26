@@ -1,13 +1,14 @@
 
-var app = angular.module('ABMangularPHP', []);
+var app = angular.module('ABMangularPHP', []); //crea una variable pero el obj a crear es un modulo a crear y el paramentro a recibir es el nombre del modulo
 
 
 app.controller('controlMenu', function($scope, $http) {
-  $scope.DatoTest="**Menu**";
+  $scope.DatoTest="**casanova**";
+  $scope.OtroDato="**otro dato**";
 });
 
 
-app.controller('controlAlta', function($scope, $http) {
+app.controller('controlAlta', function($scope, $http) { //delegado-> cuando tenga q ejecutar este otrol se ejecuta esta linea
   $scope.DatoTest="**alta**";
 
 //inicio las variables
@@ -16,8 +17,13 @@ app.controller('controlAlta', function($scope, $http) {
  $scope.persona.dni= "12312312" ;
   $scope.persona.apellido= "natalia" ;
   $scope.persona.foto="sinfoto";
+  $scope.mascota={};
+  //$scope.mascota="mascota";
+  $scope.mascota.nombre="mascota";
+  $scope.mascota.edad="12";
+ $scope.mascota.raza="maltes";
 
-
+ console.log($scope.mascota);
   $scope.Guardar=function(){
 
 

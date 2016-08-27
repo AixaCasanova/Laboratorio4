@@ -8,7 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="../estilo.css">
 		<link rel="stylesheet" type="text/css" href="../animacion.css">
 		<!--final de Estilos-->
-
+		<script SRC="bower_components/angular/angular.min.js" TYPE="text/javascript"></script> 
 		<!--Lógica-Programación-->
 		<script type="text/javascript" src="jsFerretePinturas.js"></script>
         <!--Final de Lógica-Programación -->
@@ -16,12 +16,14 @@
 
 		</head>
 	<body>
+	<div ng-app="FerretePinturas"  ng-controller="Control2">
+
 		<div class="CajaUno animated bounceInDown">
 			
 		
 			<form id="FormIngreso">
 
-				<input type="text"  placeholder="Ingrese Temparatura" id="Temperatura">
+				<input type="text" ng-model="temp" placeholder="Ingrese Temparatura" id="Temperatura">
 	
 				<br>
 				
@@ -31,9 +33,10 @@
 		<div class="CajaUno animated bounceInLeft">
 			
 			
-			<button  class="MiBotonUTN" onclick="FahrenheitCentigrados()" >A- de Fahrenheit a Centígrados </button>
-			<button  class="MiBotonUTN" onclick="CentigradosFahrenheit()" >B- de Centígrados a Fahrenheit</button>
-			
+			<button  class="MiBotonUTN" ng-click="FahrenheitCentigrados()" >A- de Fahrenheit a Centígrados </button>
+			<button  class="MiBotonUTN" ng-click="CentigradosFahrenheit()" >B- de Centígrados a Fahrenheit</button>
+			<br>
+			Resultado: {{result}}
 
 		</div>
 
@@ -56,5 +59,6 @@
 		<div class="CajaAbajo animated bounceInUp">
 			<a  class="MiBotonUTNLinea" onclick="location.href='index.html'" >Men&uacute; ejercicios</a>	
 		</div>
+	</div>
 	</body>
 </html>

@@ -1,0 +1,29 @@
+form1:
+nombre
+apellido
+edad(number)
+sexo (radio)
+dni(number)
+mail(mail)
+estado option->select
+fech nac (dat)
+clave(password)
+copia de clave(password)
+lenguaje de programacion(chekbox)
+
+form2:
+juego ver index
+
+
+mail y password que pase la info p el otro lado que lo pase a otro html y mostrarlo 
+
+//angular spiner (ara que muestre esperando) en el the deshabilito el spiner borra el boton 
+
+
+<span ng-if="form.nombre.$invalid"> este campo es requerido </span>
+
+
+ng-if crea y destruye
+ng-show lo crea y oculta
+
+w3school

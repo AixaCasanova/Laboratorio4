@@ -21,6 +21,7 @@ function Materiales ()
 
 var app = angular.module("FerreteFacturacion", []);
 app.controller("Control2", function($scope){
+	
 $scope.largo="1";
 $scope.ancho="2";
 $scope.radio="3";

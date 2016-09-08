@@ -57,6 +57,9 @@ $scope.Falta="";
 	}
 	$scope.comenzar=function()
 	{
+
+		$scope.num="0";
+		$scope.intentos=0;
 		$scope.NSecreto= Math.round(Math.random()*100);
 		$scope.result="Numero secreto generado, Comienza!";
 	

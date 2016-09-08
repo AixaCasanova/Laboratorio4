@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<script SRC="bower_components/angular/angular.min.js" TYPE="text/javascript"></script> 
+		<script type="text/javascript" src="aplic.js"></script>
+	    <link rel="stylesheet" type="text/css" href="Estilo.css">
+	</head>
+
+	<body ng-app="app"  ng-controller="Control">
+		<form id="frm" name="frm">
+
+			<div class="login">
+				<h1>Formulario Nro 1</h1> 
+				nombre:<input type="text" name="nombre" ng-model="persona.nombre" placeholder="nombre" required/><span style="color:red" ng-if="frm.nombre.$invalid">*</span><br><br>
+				apellido:<input type="text" name="apellido" ng-model="persona.apellido" placeholder="apellido" required><span style="color:red" ng-if="frm.apellido.$invalid">*</span><br><br>
+				edad: <input type="number" name="edad" ng-model="persona.edad" placeholder="edad" required><span style="color:red" ng-if="frm.edad.$invalid">*</span><br><br>
+				Sexo:<br>
+				F<input type="radio" name="sexo" id="f"><br>
+				M<input type="radio" name="sexo" id="m"><br><br>
+				dni:<input type="number" name="dni" placeholder="dni" ng-model="persona.dni" required><span style="color:red" ng-if="frm.dni.$invalid">*</span><br><br>
+				mail:<input type="mail" name="mail" ng-model="persona.mail" placeholder="ejemplo@ejemplo.com" required><span style="color:red" ng-if="frm.mail.$invalid">*</span><br><br>
+				estado civil: <select><br>
+				<option>Soltero</option>
+				<option>Casado</option>
+				</select><br><br>
+				Fecha de Nacimiento:<input type="date" name="Fnac" ng-model="Fnac" required><span style="color:red" ng-if="frm.Fnac.$invalid">*</span><br><br>
+				Password:<input type="password" name="pass" ng-model="persona.pass" required><span style="color:red" ng-if="frm.pass.$invalid">*</span><br><br>
+				Reingrese la password:<input type="password" name="passCP"  ng-model="persona.passCP" required><br><span style="color:red" ng-if="frm.passCP.$invalid">*</span><br>
+				Lenguaje/s de programacion:<br>
+				c++<input type="checkbox" name="c++"><br>
+				c#<input type="checkbox" name="c#"><br>
+				basic<input type="checkbox" name="basic"><br>
+				php<input type="checkbox" name="php"><br>
+				java<input type="checkbox" name="java"><br>
+				<input type="button" ng-disabled="frm.pass!=frm.passCP" ng-click="guardar()" name="registrar" value="registrar">
+				
+			</div>
+		</form>
+	</body>
+</html>

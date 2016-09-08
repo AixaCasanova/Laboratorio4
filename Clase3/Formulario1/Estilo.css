@@ -13,8 +13,13 @@
 
 @import "http://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css";
 
+span{
+  color: black;
+}
+/*estilos para */
 input.ng-invalid{
-  background-color:red;
+ /* background-color:red;*/
+  
 
 }
 
@@ -28,7 +33,7 @@ body {
   position: relative;
   margin: 50px auto;
   padding: 20px 20px 20px;
-  width: 510px;
+  width: 610px;
   background: white;
   border-radius: 3px;
   -webkit-box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
@@ -138,7 +143,7 @@ input[type=text], input[type=password], input[type=number] , input[type=date] , 
   width: 200px;
   height: 34px;
   color: #404040;
-  background: white;
+  
   border: 1px solid;
   border-color: #c4c4c4 #d1d1d1 #d4d4d4;
   border-radius: 2px;

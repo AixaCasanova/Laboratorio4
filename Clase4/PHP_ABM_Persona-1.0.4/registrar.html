@@ -1,0 +1,14 @@
+<form id="frm" name="frm">
+
+			<div class="login">
+				<h1>Registrarse</h1> 
+				mail:<input type="mail" name="mail" ng-model="mail" placeholder="ejemplo@ejemplo.com" required><span style="color:red" ng-if="frm.mail.$invalid">*</span><br><br>
+				Password:<input type="password" name="pass" ng-model="pass" required><span style="color:red" ng-if="frm.pass.$invalid">*</span><br><br>
+
+				Reingrese la Password:<input type="password" name="passCP" ng-model="passCP" required><span style="color:red" ng-if="frm.passCP.$invalid">*</span><br><br>
+			 
+				<input type="button" ng-click="guardar()" ng-disabled="frm.pass==frm.passCP" name="registrar" value="registrar" >
+				
+			</div>
+		</form>
+<!-- style="background-color:#145AFC"   ng-disabled="frm.pass!=frm.passCP"     -->	

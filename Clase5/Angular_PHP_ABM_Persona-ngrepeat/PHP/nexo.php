@@ -95,6 +95,13 @@ else{
 			echo json_encode(Persona::TraerUnaPersona($respuesta->datos->id));
 			break;
 		}
+		case "loguear":
+		{
+			//echo json_encode(Login::TraerUnLogin($respuesta->datos->Mail));
+			//echo json_encode(Persona::TraerUnaPersona($respuesta->datos->id));
+echo json_encode(Persona::TraerUnaPersona($respuesta->datos->id));
+			break;
+		}
 		case "modificar":
 		{
 			if($respuesta->datos->persona->foto!="pordefecto.png")

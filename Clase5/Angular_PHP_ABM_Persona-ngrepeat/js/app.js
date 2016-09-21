@@ -1,4 +1,4 @@
-
+/* juego usuario y result en la bdd y login tmb en la bdd piedra papel y tij y jueg dalton p juegos */
 var app = angular.module('ABMangularPHP', ['ui.router', 'angularFileUpload'])//esto permite incluir el módulo 'ui.router' al módulo 'ABMangularPHP'
 .config(function($stateProvider, $urlRouterProvider)
 {
@@ -18,7 +18,22 @@ var app = angular.module('ABMangularPHP', ['ui.router', 'angularFileUpload'])//e
 	.state('grilla',
 	{url: '/grilla',
 	templateUrl: 'grilla.html',
+	controller: 'controlGrilla'})
+//---------------------nuevo
+	.state('login',
+	{url: '/login',
+	templateUrl: 'login.html',
+	controller: 'ControlL'})
+	 .state('regist',
+	{url: '/regist',
+	templateUrl: 'regist.html',
+	controller: 'controlGrilla'})
+	.state('juegos',
+	{url: '/juegos',
+	templateUrl: 'juegos.html',
 	controller: 'controlGrilla'});
+//---------------------
+
 	$urlRouterProvider.otherwise('/menu');
 });
 
@@ -81,7 +96,7 @@ app.controller('controlGrilla', function($scope, $http, $state) {
  	.then(function(respuesta) {     	
 
       	 $scope.ListadoPersonas = respuesta.data.listado;
-      	 console.log(respuesta.data);
+      	 console.log(respuesta);
 
     },function errorCallback(response) {
      		 $scope.ListadoPersonas= [];
@@ -206,7 +221,7 @@ app.controller('controlModificacion', function($scope, $http, $state, $statePara
 		function errorCallback(response)
 		{
 			//aca se ejecuta cuando hay errores
-			console.log( response);     			
+			console.log(response);     			
 		});
 		console.info("Ya guardé el archivo.", item, response, status, headers);
 	};
@@ -220,3 +235,35 @@ app.controller('controlModificacion', function($scope, $http, $state, $statePara
 		$scope.uploader.uploadAll();
 	}
 });
+
+
+
+//----------------- nuevo 
+
+app.controller('ControlL', function($scope,$http,$state)//, $routeParams, $location)
+{
+	$scope.mail="";
+	$scope.pass="";
+	$scope.resp="No logueado";
+
+
+	 //$scope.loguer=function()
+	//{
+		 
+		$http.get('PHP/nexo.php', { params: {accion :"loguear"}})
+	 	.then(function(respuesta) {     	
+
+	      	 $scope.ListadoL = respuesta.data;
+	      	 console.log(respuesta);
+
+	    },function errorCallbac(response) {
+	     		 $scope.ListadoL= [];
+	     		console.log(response);
+	 	 });
+ 		 
+	//}
+
+});
+
+
+

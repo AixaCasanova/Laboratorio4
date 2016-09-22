@@ -1,0 +1,15 @@
+js
+---------------
+
+sattelizer 
+$ bower install satellizer
+incluir modulo en el index
+
+server
+---------------------
+php
+----
+jwt::
+jwt::
+
+auth.php

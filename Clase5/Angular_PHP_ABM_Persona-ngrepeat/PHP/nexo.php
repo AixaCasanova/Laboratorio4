@@ -1,6 +1,7 @@
 <?php 
 
 include "clases/Personas.php";
+include "clases/Login.php";
 // $_GET['accion'];
 if ( !empty( $_FILES ) ) 
 {
@@ -97,9 +98,10 @@ else{
 		}
 		case "loguear":
 		{
-			//echo json_encode(Login::TraerUnLogin($respuesta->datos->Mail));
+
+
+			echo json_encode(Login::TraerUnLogin($respuesta->datos->mail));
 			//echo json_encode(Persona::TraerUnaPersona($respuesta->datos->id));
-echo json_encode(Persona::TraerUnaPersona($respuesta->datos->id));
 			break;
 		}
 		case "modificar":

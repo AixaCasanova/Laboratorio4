@@ -247,21 +247,28 @@ app.controller('ControlL', function($scope,$http,$state)//, $routeParams, $locat
 	$scope.resp="No logueado";
 
 
-	 //$scope.loguer=function()
-	//{
+	$scope.loguer=function()
+	{
 		 
-		$http.get('PHP/nexo.php', { params: {accion :"loguear"}})
+		//$http.get('PHP/nexo.php', { params: {accion :"loguear"}})
+		$http.post('PHP/nexo.php', { datos: {accion :"loguear", mail:$scope.mail}})
 	 	.then(function(respuesta) {     	
 
-	      	 $scope.ListadoL = respuesta.data;
-	      	 console.log(respuesta);
+	      	 if (respuesta.data.Mail == $scope.mail && respuesta.data.pass == $scope.pass) 
+	      	 	{
+	      	 		$scope.htmlD="<input type='button' value='desloguear'>";
+	      	 		document.getElementById('divlogin').html = $scope.htmlD;
+	      	 		//console.log(document.getElementById('divlogin'));
+	      	 		//$("#divlogin").html($scope.htmlD);
+					$scope.resp="Logueado";
+	      	 	}
 
 	    },function errorCallbac(response) {
 	     		 $scope.ListadoL= [];
 	     		console.log(response);
 	 	 });
  		 
-	//}
+	}
 
 });
 

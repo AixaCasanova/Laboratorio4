@@ -58,8 +58,8 @@ class Login
 
 
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		//$consulta =$objetoAccesoDato->RetornarConsulta("select * from Login where id =:id");
-		$consulta =$objetoAccesoDato->RetornarConsulta("CALL TraerUnaLogin(:MailP)");
+		$consulta =$objetoAccesoDato->RetornarConsulta("select * from Login where Mail =:MailP");
+		//$consulta =$objetoAccesoDato->RetornarConsulta("CALL TraerUnLogin(:MailP)");
 		$consulta->bindValue(':MailP', $MailP, PDO::PARAM_INT);
 		$consulta->execute();
 		$LoginBuscada= $consulta->fetchObject('Login');
@@ -71,7 +71,7 @@ class Login
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 		//$consulta =$objetoAccesoDato->RetornarConsulta("select * from Login");
-		$consulta =$objetoAccesoDato->RetornarConsulta("CALL TraerTodasLasLogins() ");
+		$consulta =$objetoAccesoDato->RetornarConsulta("CALL TraerTodasLosLogins()");
 		$consulta->execute();			
 		$arrLogins= $consulta->fetchAll(PDO::FETCH_CLASS, "Login");	
 		return $arrLogins;

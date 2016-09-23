@@ -252,14 +252,18 @@ app.controller('ControlL', function($scope,$http,$state,$auth)//, $routeParams, 
 	$scope.usuario={};
 	$scope.usuario.mail="";
 	$scope.usuario.pass="";
-	$scope.resp="Deslogueado";
+	
 	 
 	 if ($auth.isAuthenticated()) {
 	 	console.info("token",$auth.getPayload());
-	 }else{$state.go('login');//ver esta linea
+	 	$scope.ver=false;
+	 }else{
+	 	$scope.ver=true;
+	 	$scope.resp="Deslogueado";
+	 $state.go('login');//ver esta linea
 	 } 
 
-$scope.ver=true;
+
 
 	$scope.loguer=function()
 	{
@@ -270,26 +274,48 @@ $scope.ver=true;
 
 	      	 if (respuesta.data.Mail == $scope.mail && respuesta.data.pass == $scope.pass) 
 	      	 	{
-				$scope.ver=false;	
-				$scope.resp="Logueado"; 
+					$scope.ver=false;	
+					$scope.resp="Logueado"; 
 
 					$auth.login($scope.usuario)
 					.then(function(response) {
-					  console.info("correcto",response);
-					})
+						console.info("correcto",response);
+
+						//------------------
+						if ($auth.isAuthenticated()) {
+						console.info("token",$auth.getPayload());
+						}else{
+							console.info("notoken",$auth.getPayload());//$state.go('login');
+					    } 
+							//----------------
+
+
+							})
 					.catch(function(response) {
-					     console.info("no volvio bien",response);
+					    console.info("no volvio bien",response);
 					});
 
-
+	      	 	}else{
+	      	 		$state.go('login');
+	      	 		
 	      	 	}
 
-	    },function errorCallbac(response) {
-	     		 $scope.ListadoL= [];
-	     		console.log(response);
+		},function errorCallbac(response) {
+			$scope.ListadoL= [];
+			console.log(response);
 	 	 });
  		 
 	}
+
+
+	$scope.Desloguear=function()
+	{
+	$scope.resp="Deslogueado";	 
+	$scope.ver=true;
+
+ 		 
+	}
+
 
 });
 

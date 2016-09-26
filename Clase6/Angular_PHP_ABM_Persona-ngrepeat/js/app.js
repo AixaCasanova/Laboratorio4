@@ -8,6 +8,20 @@ var app = angular.module('ABMangularPHP', ['ui.router', 'angularFileUpload', 'sa
 	$authProvider.tokenPrefix = "Aplicacion";
 	$authProvider.authHeader="data";
 
+	$authProvider.github({
+	  url: '/auth/github',
+	  clientId: 'aa6278427cb7f36c453b',
+	  authorizationEndpoint: 'https://github.com/login/oauth/authorize',
+	  redirectUri: window.location.origin,
+	  optionalUrlParams: ['scope'],
+	  scope: ['user:email'],
+	  scopeDelimiter: ' ',
+	  oauthType: '2.0',
+	  popupOptions: { width: 1020, height: 618 }
+	});
+
+	
+
 
 	$stateProvider
 	.state('menu',
@@ -264,41 +278,47 @@ app.controller('ControlL', function($scope,$http,$state,$auth)//, $routeParams, 
 	 } 
 
 
-
+	$scope.authenticate = function(provider) {
+		      $auth.authenticate(provider);
+		    };
+		    
 	$scope.loguer=function()
 	{
+
 		 
 		//$http.get('PHP/nexo.php', { params: {accion :"loguear"}})
 		$http.post('PHP/nexo.php', { datos: {accion :"loguear", mail:$scope.mail, pass:$scope.pass}})
-	 	.then(function(respuesta) {     	
+	 	.then(function(respuesta) {     
 
-	      	 if (respuesta.data.Mail == $scope.mail && respuesta.data.pass == $scope.pass) 
-	      	 	{
-					$scope.ver=false;	
-					$scope.resp="Logueado"; 
+		
 
-					$auth.login($scope.usuario)
-					.then(function(response) {
-						console.info("correcto",response);
+	    //   	 if (respuesta.data.Mail == $scope.mail && respuesta.data.pass == $scope.pass) 
+	    //   	 	{
+					// $scope.ver=false;	
+					// $scope.resp="Logueado"; 
 
-						//------------------
-						if ($auth.isAuthenticated()) {
-						console.info("token",$auth.getPayload());
-						}else{
-							console.info("notoken",$auth.getPayload());//$state.go('login');
-					    } 
-							//----------------
+					// $auth.login($scope.usuario)
+					// .then(function(response) {
+					// 	console.info("correcto",response);
+
+					// 	//------------------
+					// 	if ($auth.isAuthenticated()) {
+					// 	console.info("token",$auth.getPayload());
+					// 	}else{
+					// 		console.info("notoken",$auth.getPayload());//$state.go('login');
+					//     } 
+					// 		//----------------
 
 
-							})
-					.catch(function(response) {
-					    console.info("no volvio bien",response);
-					});
+					// 		})
+					// .catch(function(response) {
+					//     console.info("no volvio bien",response);
+					// });
 
-	      	 	}else{
-	      	 		$state.go('login');
+	    //   	 	}else{
+	    //   	 		$state.go('login');
 	      	 		
-	      	 	}
+	    //   	 	}
 
 		},function errorCallbac(response) {
 			$scope.ListadoL= [];

@@ -1,0 +1,23 @@
+
+	<form id="frm" name="frm">
+
+		<div ng-if="ver==true" id="divlogin">  
+			<div class="login">
+				<h1 >Login</h1> 
+				mail:<input type="mail" style="color:black" name="mail" ng-model="usuario.mail" placeholder="ejemplo@ejemplo.com" required><span style="color:red" ng-if="frm.mail.$invalid">*</span><br><br>
+					Password:<input type="password" style="color:black" name="pass" ng-model="usuario.pass" required><span style="color:red" ng-if="frm.pass.$invalid">*</span><br><br>
+
+				<input type="button" ng-click="loguer()" style="color:black" name="registrar" value="Loguearse" ><br><br>
+	 
+			    <a href="#/persona/alta"  class="MiBotonUTN"  style="color:black">volver</a> 
+			</div>
+			  
+			
+		</div>
+		<div ng-if ="ver!=true">
+		  <input type='button' style="color:black" value='desloguear' ng-click="Desloguear()"> 
+		  </div> 
+		  
+	  {{resp}}
+
+	</form>

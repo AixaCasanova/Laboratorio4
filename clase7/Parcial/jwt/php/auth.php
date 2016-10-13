@@ -12,7 +12,7 @@ $user=json_decode($datosDelModeloPorPost);
 	$token["usuario"]=$user->mail;
 	$token["perfil"]=$user->tipo;
 	$token["iat"]=time();
-	$token["exp"]=time()+20;
+	$token["exp"]=time()+500;
 	$token["algo"]=$user;
 
 	$jwt = JWT::encode($token, $claveDeEncripcion);

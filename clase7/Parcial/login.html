@@ -8,16 +8,16 @@
 					Password:<input type="password" style="color:black" name="pass" ng-model="usuario.pass" required><span style="color:red" ng-if="frm.pass.$invalid">*</span><br><br>
 
 				<input type="button" ng-click="loguer()" style="color:black" name="registrar" value="Loguearse" ><br><br>
-	 
-			    <a href="#/persona/alta"  class="MiBotonUTN"  style="color:black">volver</a> 
+	  
 			</div>
 			  
 			
 		</div>
+
 		<div ng-if ="ver!=true">
-		  <input type='button' style="color:black" value='desloguear' ng-click="Desloguear()"> 
+		  <input type='button' style="color:black" value='desloguear' ng-disabled="mail.$invalid || pass.$invalid" ng-click="Desloguear()"> 
 		  </div> 
 		  
 	  {{resp}}
-
+ <a href="#/persona/alta"  class="MiBotonUTN"  style="color:black">volver</a> 
 	</form>

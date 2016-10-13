@@ -7,7 +7,7 @@ class Login
 	public $mail;
 	public $pass;
 	public $tipo;
-
+	public $foto;
 
 //--------------------------------------------------------------------------------//
 
@@ -25,7 +25,15 @@ class Login
 	{
 		return $this->tipo;
 	}
+	public function Getfoto()
+	{
+		return $this->foto;
+	}
 	
+	public function Setfoto($valor)
+	{
+		$this->foto = $valor;
+	}
 	public function Settipo($valor)
 	{
 		$this->tipo = $valor;
@@ -79,8 +87,8 @@ class Login
 	public static function TraerTodosLosLogins()
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		//$consulta =$objetoAccesoDato->RetornarConsulta("select * from Login");
-		$consulta =$objetoAccesoDato->RetornarConsulta("CALL TraerTodasLosLogins()");
+		$consulta =$objetoAccesoDato->RetornarConsulta("select * from Login");
+		//$consulta =$objetoAccesoDato->RetornarConsulta("CALL TraerTodasLosLogins()");
 		$consulta->execute();			
 		$arrLogins= $consulta->fetchAll(PDO::FETCH_CLASS, "Login");	
 		return $arrLogins;
@@ -89,8 +97,8 @@ class Login
 	public static function BorrarLogin($MailP)
 	{	
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		//$consulta =$objetoAccesoDato->RetornarConsulta("delete from Login	WHERE id=:id");	
-		$consulta =$objetoAccesoDato->RetornarConsulta("CALL BorrarLogin(:Mail)");	
+		$consulta =$objetoAccesoDato->RetornarConsulta("delete from login WHERE Mail=:Mail");	
+		//$consulta =$objetoAccesoDato->RetornarConsulta("CALL BorrarLogin(:Mail)");	
 		$consulta->bindValue(':Mail',$MailP, PDO::PARAM_INT);		
 		$consulta->execute();
 		return $consulta->rowCount();
@@ -121,11 +129,12 @@ class Login
 	public static function InsertarLogin($Login)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		//$consulta =$objetoAccesoDato->RetornarConsulta("INSERT into Login (nombre,pass,Mail,foto)values(:nombre,:pass,:Mail,:foto)");
-		$consulta =$objetoAccesoDato->RetornarConsulta("CALL InsertarLogin (:Mail,:pass,:tipo");
+		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT into Login (Mail,pass,tipo,foto)values(:Mail,:pass,:tipo,:foto)");
+		//$consulta =$objetoAccesoDato->RetornarConsulta("CALL InsertarLogin (:Mail,:pass,:tipo,:foto");
 		$consulta->bindValue(':pass', $Login->pass, PDO::PARAM_STR);
-		$consulta->bindValue(':Mail', $Login->Mail, PDO::PARAM_STR); 
+		$consulta->bindValue(':Mail', $Login->mail, PDO::PARAM_STR); 
 		$consulta->bindValue(':tipo', $Login->tipo, PDO::PARAM_STR); 
+		$consulta->bindValue(':foto', $Login->foto, PDO::PARAM_STR); 
 		$consulta->execute();		
 		return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	

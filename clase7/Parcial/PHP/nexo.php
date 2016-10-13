@@ -28,6 +28,12 @@ if(isset($_GET['accion']))
 		$respuesta['votos']= Votos::TraerTodosLosVotos();
 		echo json_encode($respuesta);
 	}
+	elseif ($accion=="traerU") {
+		$respuesta= array();
+		$respuesta['listado']=Login::TraerTodosLosLogins();
+		$arrayJson = json_encode($respuesta);
+		echo  $arrayJson;
+	}
 
 
 	
@@ -100,9 +106,77 @@ else{
 			}else{$UnVoto->foto="sinfoto.jpg";}
 			Votos::InsertarVoto($UnVoto);
 			 echo json_encode($respuesta->datos->voto->dni);
+			 break;
+		}
+		case "BorrarV":
+		{
+			if($respuesta->datos->voto->foto!="sinfoto.jpg")
+			{
+				unlink("../fotos/vot/".$respuesta->datos->voto->foto);
+			}
+			$result=Votos::BorrarVoto($respuesta->datos->voto->dni);
+			echo json_encode($result);
+			break;
+		}
+		case "BorrarU":
+		{
+			if($respuesta->datos->persona->foto!="sinfoto.png")
+			{
+				unlink("../fotos/uss/".$respuesta->datos->persona->foto);
+			}
+			Login::BorrarLogin($respuesta->datos->persona->Mail);
+			break;
+		}
+		case "modificarV":
+		{
+			if($respuesta->datos->voto->foto!="pordefecto.png")
+			{
+				$rutaVieja="../fotos/vot/".$respuesta->datos->voto->foto;
+				$rutaNueva=$respuesta->datos->voto->dni.".".PATHINFO($rutaVieja, PATHINFO_EXTENSION);
+				//copy($rutaVieja, "../fotos/vot/".$rutaNueva);
+				if($respuesta->datos->voto->foto!="sinfoto.jpg")
+			{
+				unlink($rutaVieja);
+			}
+				
+				$respuesta->datos->voto->foto=$rutaNueva;
+			}
+			//$result=Votos::BorrarVoto($respuesta->datos->voto->dni);
+			votos::ModificarVoto($respuesta->datos->voto);
+
+			break;
+		}
+		case "AltaUsu":
+		{
+			$UnUs = new Login();
+			$UnUs->mail=$respuesta->datos->usuario->mail;
+			$UnUs->pass=$respuesta->datos->usuario->pass;
+			$UnUs->tipo=$respuesta->datos->usuario->tipo;
+			$UnUs->foto=$respuesta->datos->usuario->foto;
+			if (isset($respuesta->datos->usuario->foto)) {
+				$UnUs->foto=$respuesta->datos->usuario->foto;
+			}else{$UnUs->foto="sinfoto.jpg";}
+			Login::InsertarLogin($UnUs);
+			echo json_encode($UnUs->mail);
+			break;
+		 
 		}
 		 
-
+		case "upIMGR":
+		{	 
+			if (isset($respuesta->datos->usuario->foto)) {
+				$rutaVieja="../fotos/".$respuesta->datos->usuario->foto;
+				$rutaNueva="../fotos/uss/".$respuesta->datos->usuario->foto;
+				if (file_exists($rutaVieja)) {
+					copy($rutaVieja, $rutaNueva);
+					unlink($rutaVieja);
+				}
+				
+			}
+			 echo json_encode($rutaNueva);
+			 break;
+			 
+		}
 			case "upIMG":
 		{	 
 			if (isset($respuesta->datos->voto->foto)) {
@@ -114,8 +188,9 @@ else{
 				}
 				
 			}
+			break;
 			 
-		}
+		}	
 	}
 
 

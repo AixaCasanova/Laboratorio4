@@ -27,11 +27,22 @@ var app = angular.module('ABMangularPHP', ['ui.router', 'angularFileUpload', 'sa
 	templateUrl: 'grilla.html',
 	controller: 'controlGrilla'})
 //---------------------nuevo
+	.state('grillaU',
+	{url: '/grillaU',
+	templateUrl: 'grillaU.html',
+	controller: 'controlGrillaU'})
+ 
+ 	.state('altaUsr',
+	{url: '/altaUsr',
+	templateUrl: 'regist.html',
+	controller: 'controlGrillaU'})
+
 	.state('log',
 	{url: '/log',
 	abstract:true,
 	templateUrl: 'logAbs.html',
 	})
+
 	.state(
 	"log.login",{
 	url:"/login",
@@ -41,10 +52,14 @@ var app = angular.module('ABMangularPHP', ['ui.router', 'angularFileUpload', 'sa
 	}
 	})
 	//------------
+	.state('ModificarV',
+	{url: '/ModificarV/{dni}?:sexo:fvot:partido:foto',
+	templateUrl:'votar.html',
+	controller: 'controlvervotos'})
 	 .state('regist',
 	{url: '/regist',
 	templateUrl: 'regist.html',
-	controller: 'controlGrilla'})
+	controller: 'controlRegist'})
 	 .state('vervotos',
 	{url: '/vervotos',
 	templateUrl: 'vervotos.html',
@@ -115,7 +130,7 @@ app.controller('controlAlta', function($scope, $http, $state, FileUploader)
 	$scope.uploader.uploadAll();
   	console.log("persona a guardar:");
     console.log($scope.persona);
-	
+	$state.go("grilla");
 
   
 
@@ -273,6 +288,8 @@ app.controller('ControlL', function($scope,$http,$state,$auth)//, $routeParams, 
 
 	      	 	}else{
 	      	 		 console.log("no coincinde!");
+	      	 		 alert("usuario o contraseña invalidos!");
+	      	 		 
 	      	 		
 	      	 	}
 
@@ -286,6 +303,7 @@ app.controller('ControlL', function($scope,$http,$state,$auth)//, $routeParams, 
 
 	$scope.Desloguear=function()
 	{
+	$auth.logout();
 	$scope.resp="Deslogueado";	 
 	$scope.ver=true;
 	
@@ -359,10 +377,10 @@ app.controller('controlvotar', function($scope,$http,$state,FileUploader)//, $ro
 //-----------------------------
 
 
-app.controller('controlvervotos', function($scope,$http,$state,FileUploader)//, $routeParams, $location)
+app.controller('controlvervotos', function($scope, $http, $state, $stateParams, FileUploader)//, $routeParams, $location)
 {
 	
-//-----------------
+//-----------------------------------------
 $http.get('PHP/nexo.php', { params: {accion :"vervotos"}})
 	 	.then(function(respuesta) {     
 	 		$scope.listaVotos = respuesta.data.votos;
@@ -390,7 +408,7 @@ $http.get('PHP/nexo.php', { params: {accion :"vervotos"}})
 			$scope.voto.dni2=""; 
 			$scope.uploader=new FileUploader({url:'PHP/nexo.php'});
 			$scope.res="Voto Recibido!";
-
+			$state.go("vervotos");
 	 	
 	 	console.log(respuesta);
 
@@ -399,6 +417,176 @@ $http.get('PHP/nexo.php', { params: {accion :"vervotos"}})
 	 	 });
  		 
 	}
+//---------------
+
+
+	$scope.BorrarV=function(voto)
+	{
+	
+	
+
+		$http.post("PHP/nexo.php",{datos:{accion :"BorrarV",voto:voto}},{headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+		.then(function(respuesta) {       
+				         
+					console.log(respuesta);
+					$state.go("vervotos");
+					$state.go($state.current, {}, {reload: true});
+
+
+	    },function errorCallback(response) {        
+	        console.log( response);           
+	    });
+
+		  $state.go($state.current, {}, {reload: true});
+
+	}
+    
+		$scope.ModificarV=function(voto)
+	{
+		$scope.voto={};
+		$scope.DatoTest="**Modificar**";
+		$scope.uploader=new FileUploader({url:'PHP/nexo.php'});
+		console.log($stateParams);//$scope.persona=$stateParams;
+		$scope.voto.fvot=$stateParams.fvot;
+		$scope.voto.partido=$stateParams.partido;
+		$scope.voto.dni2=$stateParams.dni;
+		$scope.voto.dni=$stateParams.dni;
+		$scope.voto.foto=$stateParams.foto;
+	
+		$http.post("PHP/nexo.php",{datos:{accion :"modificarV",voto:voto}},{headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+		.then(function(respuesta) {       
+				         
+					console.log("hasat aca!!!");
+					console.log(respuesta);
+					
+
+	    },function errorCallback(response) {        
+	        console.log( response);           
+	    });
+	 
+		$state.go("vervotos");
+
+	}
+ 
+//---------------------
+});
+
+//----------------------------------------------------------------
+
+app.controller('controlRegist', function($scope,$http,$state,FileUploader)//, $routeParams, $location)
+{
+	
+		$scope.usuario={};
+		$scope.usuario.mail="";
+		$scope.usuario.pass="";
+		$scope.usuario.tipo="user";
+		$scope.usuario.foto="";
+		$scope.uploader=new FileUploader({url:'PHP/nexo.php'});
+	//-----------------
+
+
+	 		 
+
+	//------------------
+
+		$scope.regist=function()
+		{
+			if ($scope.usuario.foto=="") {$scope.usuario.foto="sinfoto.jpg";}
+			$http.post('PHP/nexo.php', { datos: {accion :"AltaUsu", usuario:$scope.usuario}})
+		 	.then(function(respuesta) {     
+		 	console.log("hasta aca");
+		 	console.log(respuesta);
+		 		$state.go("grillaU");
+			},function errorCallbac(response) {
+				console.log(response);
+		 	 });
+
+		
+
+			//-----------------------------------------------------
+
+		 		$http.post('PHP/nexo.php', { datos: {accion :"Regist",voto:$scope.voto}})
+			.then(function(respuesta) 
+			{
+				//aca se ejetuca si retorno sin errores      	
+				console.log(respuesta);
+				
+			},
+			function errorCallback(response)
+			{
+				//aca se ejecuta cuando hay errores
+				console.log(response);     			
+			});
+	 		 
+		}
+
+
+
+	
+
+		$scope.uploader.onSuccessItem=function(item, response, status, headers)
+		{
+			$scope.usuario.foto=item._file.name;
+			$http.post('PHP/nexo.php', { datos: {accion :"upIMGR",usuario:$scope.usuario}})
+			.then(function(respuesta) 
+			{
+				//aca se ejetuca si retorno sin errores      	
+				console.log(respuesta);
+		 
+			},
+			function errorCallback(response)
+			{
+				//aca se ejecuta cuando hay errores
+				console.log(response);     			
+			});
+			 
+		};
 
 
 });
+//---------------------------------------------
+
+app.controller('controlGrillaU', function($scope, $http, $state,FileUploader)
+ {
+ 	$scope.uploader=new FileUploader({url:'PHP/nexo.php'});
+  	$scope.DatoTest="**grilla usuarios**";
+ 	
+ 	$http.get('PHP/nexo.php', { params: {accion :"traerU"}})
+ 	.then(function(respuesta) {     	
+
+      	 $scope.ListadoPersonas = respuesta.data.listado;
+      	 console.log(respuesta);
+
+    },function errorCallback(response) {
+     		 $scope.ListadoPersonas= [];
+     		console.log( response);
+
+ 	 });
+
+
+ 		//-----------------------------------------------------
+
+
+ 	$scope.BorrarU=function(persona)
+ 	{
+		console.log("borrar"+persona);
+
+		$http.post("PHP/nexo.php",{datos:{accion :"BorrarU",persona:persona}},{headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+	 	.then(function(respuesta) {       
+	         //aca se ejetuca si retorno sin errores        
+	         console.log(respuesta.data);
+			  $state.go($state.current, {}, {reload: true});
+
+	    },function errorCallback(response) {        
+	        //aca se ejecuta cuando hay errores
+	        console.log( response);           
+	    });
+  	$state.go($state.current, {}, {reload: true});
+ 	}
+
+});
+
+
+//---------------------------------------------
+
+ 

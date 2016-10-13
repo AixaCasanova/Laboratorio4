@@ -114,7 +114,6 @@ class Votos
 		return $consulta->rowCount();
 		
 	}
-	
 	public static function ModificarVoto($Votos)
 	{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 

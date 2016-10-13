@@ -32,7 +32,8 @@
 							<td>{{votos.partido}}</td>
 							<td><img  class='fotoGrilla' ng-src="fotos/vot/{{votos.foto}}" /></td>
 							<td><button class='btn btn-danger' name='Borrar' ng-click="BorrarV(votos)">   <span class='glyphicon glyphicon-remove-circle'>&nbsp;</span>Borrar</button></td>
-							<td><button class='btn btn-warning' name='Modificar' ng-click="ModificarV({dni:votos.dni, sexo:votos.sexo, fvot:votos.fecha, partido:votos.partido, foto:votos.foto})"><span class='glyphicon glyphicon-edit'>&nbsp;</span>Modificar</button></td>
+							<td><button class='btn btn-warning' name='ModificarV' ng-click="ModificarV({dni:votos.dni, sexo:votos.sexo, fvot:votos.fecha, partido:votos.partido, foto:votos.foto})"><span class='glyphicon glyphicon-edit'>&nbsp;</span>Modificar</button></td>
+					 
 					</tr>
 
 				</table>

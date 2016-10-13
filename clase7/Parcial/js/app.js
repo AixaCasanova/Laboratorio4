@@ -53,7 +53,7 @@ var app = angular.module('ABMangularPHP', ['ui.router', 'angularFileUpload', 'sa
 	})
 	//------------
 	.state('ModificarV',
-	{url: '/ModificarV/{dni}?:sexo:fvot:partido:foto',
+	{url: '/ModificarV/:dni:sexo:fvot:partido:foto',
 	templateUrl:'votar.html',
 	controller: 'controlvervotos'})
 	 .state('regist',
@@ -83,6 +83,9 @@ app.controller('controlMenu', function($scope, $http,$auth) {
 			//console.info("token",$auth.getPayload());
 			$scope.datos=$auth.getPayload();
 			$scope.ver2=true;
+			$scope.fto=$scope.datos.foto;
+			$scope.usr=$scope.datos.usuario;
+			console.log($scope.datos.usuario);
 			//console.log($scope.datos.perfil);
 			if ($scope.datos.perfil == "user") {$scope.ver=false;}else{$scope.ver=true;}
 	}else{
@@ -231,7 +234,7 @@ app.controller('ControlL', function($scope,$http,$state,$auth)//, $routeParams, 
 	$scope.usuario.mail="aixa@mail.com";
 	$scope.usuario.pass="1234";
 	$scope.usuario.tipo="";
-	
+	$scope.usuario.foto="";
 	 
 	 if ($auth.isAuthenticated()) {
 	 	console.info("token",$auth.getPayload());
@@ -268,6 +271,11 @@ app.controller('ControlL', function($scope,$http,$state,$auth)//, $routeParams, 
 	      	 		console.log("coincinde!");
 					$scope.ver=false;	
 					$scope.resp="Logueado"; 
+
+					$scope.usuario.foto=respuesta.data.foto;
+
+					
+					
 
 					$auth.login($scope.usuario)
 					.then(function(response) 
@@ -317,7 +325,7 @@ app.controller('ControlL', function($scope,$http,$state,$auth)//, $routeParams, 
 
 
 //----------------------------
-app.controller('controlvotar', function($scope,$http,$state,FileUploader)//, $routeParams, $location)
+app.controller('controlvotar', function($scope,$http,$state,$auth,FileUploader)//, $routeParams, $location)
 {
 	$scope.voto={};
 	$scope.voto.dni=33333;
@@ -327,6 +335,7 @@ app.controller('controlvotar', function($scope,$http,$state,FileUploader)//, $ro
 	$scope.uploader=new FileUploader({url:'PHP/nexo.php'});
 	$scope.voto.dni2=111;    
 	$scope.res="";
+	$scope.datos=$auth.getPayload();
 	$scope.votar=function()
 	{
 
@@ -341,14 +350,25 @@ app.controller('controlvotar', function($scope,$http,$state,FileUploader)//, $ro
 			$scope.voto.dni2=""; 
 			$scope.uploader=new FileUploader({url:'PHP/nexo.php'});
 			$scope.res="Voto Recibido!";
+			
+		 	
 
+			if ($scope.datos.perfil == "user") {}else{
+				$state.go("vervotos");
+			}
 	 	
 	 	console.log(respuesta);
 
 		},function errorCallbac(response) {
 			console.log(response);
 	 	 });
- 		 
+	
+ 		
+			if ($scope.datos.perfil == "user") {}else{
+			 	$state.go("vervotos");
+				$state.go($state.current, {}, {reload: true});
+			}
+	 	 
 	}
 
 
@@ -394,30 +414,34 @@ $http.get('PHP/nexo.php', { params: {accion :"vervotos"}})
 
 //------------------
 
-	$scope.votar=function()
-	{
+// 	$scope.votar=function()
+// 	{
 
-		$http.post('PHP/nexo.php', { datos: {accion :"AltaVoto", voto:$scope.voto}})
-	 	.then(function(respuesta) {     
+// 		$http.post('PHP/nexo.php', { datos: {accion :"AltaVoto", voto:$scope.voto}})
+// 	 	.then(function(respuesta) {     
 
-	 		$scope.voto={};
-			$scope.voto.dni="";
-			$scope.voto.s="";
-			$scope.voto.fvot= "";
-			$scope.voto.partido="partido1";
-			$scope.voto.dni2=""; 
-			$scope.uploader=new FileUploader({url:'PHP/nexo.php'});
-			$scope.res="Voto Recibido!";
-			$state.go("vervotos");
+// 	 		$scope.voto={};
+// 			$scope.voto.dni="";
+// 			$scope.voto.s="";
+// 			$scope.voto.fvot= "";
+// 			$scope.voto.partido="partido1";
+// 			$scope.voto.dni2=""; 
+// 			$scope.uploader=new FileUploader({url:'PHP/nexo.php'});
+// 			$scope.res="Voto Recibidou!";
+			
+// 			$state.go("vervotos");
+// 			$state.go($state.current, {}, {reload: true});
 	 	
-	 	console.log(respuesta);
+// 	 	console.log(respuesta);
 
-		},function errorCallbac(response) {
-			console.log(response);
-	 	 });
+// 		},function errorCallbac(response) {
+// 			console.log(response);
+// 	 	 });
+// 	 			$state.go("vervotos");
+// 			$state.go($state.current, {}, {reload: true});
  		 
-	}
-//---------------
+// 	}
+// //---------------
 
 
 	$scope.BorrarV=function(voto)

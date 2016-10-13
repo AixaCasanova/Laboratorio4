@@ -14,6 +14,8 @@ $user=json_decode($datosDelModeloPorPost);
 	$token["iat"]=time();
 	$token["exp"]=time()+500;
 	$token["algo"]=$user;
+	$token["foto"]=$user->foto;
+
 
 	$jwt = JWT::encode($token, $claveDeEncripcion);
 	$array["MitokenGeneradoEnPhp"]=$jwt;

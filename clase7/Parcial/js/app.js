@@ -53,7 +53,7 @@ var app = angular.module('ABMangularPHP', ['ui.router', 'angularFileUpload', 'sa
 	})
 	//------------
 	.state('ModificarV',
-	{url: '/ModificarV/:dni:sexo:fvot:partido:foto',
+	{url: '/ModificarV/{dni}?::sexo:fvot:partido:foto',
 	templateUrl:'votar.html',
 	controller: 'controlvervotos'})
 
@@ -78,7 +78,7 @@ var app = angular.module('ABMangularPHP', ['ui.router', 'angularFileUpload', 'sa
 
 
 //----------------------------
-app.controller('controlMenu', function($scope, $http,$auth) 
+app.controller('controlMenu', function($scope,$http,$auth) 
 {
     //$scope.ver=true;
 	$scope.DatoTest="**Menu**";
@@ -89,13 +89,16 @@ app.controller('controlMenu', function($scope, $http,$auth)
 			$scope.ver2=true;
 			$scope.fto=$scope.datos.foto;
 			$scope.usr=$scope.datos.usuario;
-			console.log($scope.datos.usuario);
+			
 			//console.log($scope.datos.perfil);
 			if ($scope.datos.perfil == "user") {$scope.ver=false;}else{$scope.ver=true;}
+			 
 	}else{
 		console.info("notoken",$auth.getPayload());
 		$scope.ver2=false;
+	 
 	}
+
 
 });
 
@@ -424,7 +427,7 @@ app.controller('controlvervotos', function($scope, $http, $state, $stateParams, 
 		$scope.voto.dni2=$stateParams.dni;
 		$scope.voto.dni=$stateParams.dni;
 		$scope.voto.foto=$stateParams.foto;
-	
+		console.log($stateParams);
 			
 		$scope.uploader.onSuccessItem=function(item, response, status, headers)
 		{

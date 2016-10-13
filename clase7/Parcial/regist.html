@@ -63,8 +63,9 @@
                             </tbody>
                         </table>
              
-            <input type="button" ng-click="regist()" ng-disabled="usuario.pass != usuario.passCP || frm.mail.$invalid || frm.pass.$invalid || frm.passCP.$invalid" name="registrar" value="registrar" >
-			<a href="#/persona/alta"  class="MiBotonUTN"  style="color:black">volver</a> 
+            <input type="button" ng-click="regist()" class='btn btn-danger' ng-disabled="usuario.pass != usuario.passCP || frm.mail.$invalid || frm.pass.$invalid || frm.passCP.$invalid" name="registrar" value="registrar" >
+			<br><br><center><a href="#/persona/alta" style="width:300"  class='btn btn-warning'  style="color:black">volver</a> 
+            </center>
 			</div>
 		</form>
 <!-- style="background-color:#145AFC"   ng-disabled="frm.pass!=frm.passCP"     -->	

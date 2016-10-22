@@ -1,0 +1,29 @@
+<div>
+  <h3>{{titulo}}</h3>
+  <div ui-grid="gridOptions" class="myGrid"
+    ui-grid-pagination
+    ui-grid-resize-columns
+  >
+  
+
+  </div>	
+ 
+
+<!--   <ng-map center="{{lat}},{{long}}" zoom="3"></ng-map> -->
+   <ng-map center="{{lat}},{{long}}">
+   	 <marker position="{{lat}},{{long}}" >
+   	 </marker>
+   	 <marker ng-repeat="p in amis"
+      position="{{p.latitud}},{{p.longitud}}">
+      <div>	
+      </div>
+    </custom-marker>
+
+
+
+   </ng-map>
+
+       
+</div>
+ 
+</div>

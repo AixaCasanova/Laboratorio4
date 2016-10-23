@@ -35,6 +35,7 @@ angular
             map.customMarkers[el.className].setContent(el.innerHTML);
             map.customMarkers[el.className].setVisible(true);
             map.customMarkers[el.className].draw();
+            
           };
           vm.closeCustomMarker= function(evt)
           {
@@ -53,7 +54,7 @@ angular
         // console.info(parametro.latitud);
       }
 
-         $scope.veramigos = function(parametro)
+      $scope.veramigos = function(parametro)
       {
         console.info(parametro.amigos[0].latitud);
      

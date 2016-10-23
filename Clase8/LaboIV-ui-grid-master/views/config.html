@@ -14,8 +14,10 @@
    	 <marker position="{{lat}},{{long}}" >
    	 </marker>
    	 <marker ng-repeat="p in amis"
-      position="{{p.latitud}},{{p.longitud}}">
+      position="{{p.latitud}},{{p.longitud}}" icon="{{p.avatar}}" title="{{p.nombre}}">
+
       <div>	
+       {{p.apellido}}
       </div>
     </custom-marker>
 
@@ -27,3 +29,5 @@
 </div>
  
 </div>
+
+<!-- icon="{{p.avatar}}"-->

@@ -1,0 +1,42 @@
+<div>
+	<!--   <h3>{{titulo}}</h3>
+	  <div ui-grid="gridOptions" class="myGrid"
+	    ui-grid-pagination
+	    ui-grid-resize-columns
+	  ></div> -->
+	<!-- antes     -->
+
+	<!-- el guion representa al mayuscula y aca va todo en minuscula     -->
+
+	 <utn-saludo></utn-saludo> <!-- E     -->
+
+
+	<div utn-saludo></div> <!-- A     -->
+
+
+	<utn-saludo-dos></utn-saludo-dos> <!-- E     -->
+
+	<div utn-saludo-dos></div> <!-- A     -->
+
+	 <div class="utn-saludo-dos"></div>  <!-- C     -->
+
+	 <!-- Directive= utn-saludo-dos --> <!-- M  - ver por q no anda     -->
+
+	 <utn-titulo></utn-titulo> <!-- por q restict tiene solo E    -->
+
+	 <utn-titulo-parametro miparametro="Nuevo titulo"></utn-titulo-parametro> <!--  el parametro 'miparametro' va todo en minusculo  -->
+	 <bandera miparametro="Argentina" miparametro2="p5.jpg"></bandera>
+
+<!-- 
+	<div ng-repeat="Bandera in listadoBanderas">
+<bandera miparametro="{{Bandera.Nombre}}" miparametro2="{{Bandera.BanderaChica}}"></bandera>
+	</div>  -->
+
+
+	<div ng-repeat="Bandera in listadoBanderas">
+		<mi-bandera labanderaporparametro="Bandera"></mi-bandera>
+	</div> 
+
+
+
+</div>

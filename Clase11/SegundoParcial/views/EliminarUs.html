@@ -1,0 +1,28 @@
+ 
+<form id="frm" name="frm">
+	<center>
+
+		Nombre: <input type="text" name="nombre" ng-model="usuario.nombre" disabled><br><br>
+		Apellido:<input type="text" name="apellido" ng-model="usuario.apellido" disabled><br><br>
+		Direccion:<input type="text" name="direcion" ng-model="usuario.dir" disabled><br><br>
+		Mail:<input type="mail" name="mail" ng-model="usuario.mail" disabled><br><br>
+		Telefono:<input type="number" name="telefono" ng-model="usuario.tel" disabled><br><br>
+		Password:<input type="password" name="password" ng-model="usuario.pass" disabled><br><br>
+		Tipo:<select ng-model="usuario.tipo" disabled>
+		 <option value="administrador">administrador</option>
+		  <option value="comprador">comprador</option>
+		   <option value="vendedor">vendedor</option>
+		</select><br><br> 
+		Sucursal:
+		 <select ng-model="SucElegida" disabled>
+		 <option ng-repeat="s in Lsucursales" value={{s.nombre}}>{{s.nombre}}</option>
+		</select><br><br>  
+		Estado:<select ng-model="usuario.estado" disabled>
+		 <option value="H">Habilitado</option>
+		  <option value="D">Deshabilitado</option>
+		</select><br><br> 
+		<input type="button" ng-click="Elim()" style="color:black" name="ModifC" value="Eliminar" >
+		<input type="button" ng-click="Volver()" style="color:black" name="Volver" value="Volver" ><br><br>
+	 
+	</center>
+</form>

@@ -1,0 +1,12 @@
+<table border="2">
+ 		<tr><th>Id</th><th>descripcion</th><th>precio</th><th>Modificar</th><th>Eliminar</th></tr>		
+		<tr ng-repeat="prod in listaProd">		 
+			<td>{{prod.id_producto}}</td>
+			<td>{{prod.descripcion}}</td>
+			<td>{{prod.precio}}</td>
+			<td><input type="button"  value="Modificar" ng-click="IrModificarP(prod)"></td>
+			<td><input type="button"  value="Eliminar" ng-click="IrEliminarP(prod)"></td>
+			<td></td>
+		</tr>
+</table>
+

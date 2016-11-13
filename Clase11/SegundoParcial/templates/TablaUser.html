@@ -1,0 +1,30 @@
+<table border="2">
+ 		<tr>
+ 		<th>Id</th>
+ 		<th>nombre</th>
+ 		<th>apellido</th>
+ 		<th>direccion</th>
+ 		<th>mail</th>
+ 		<th>telefono</th>
+ 		<th>tipo</th>
+ 		<th>estado</th>
+ 		<th>sucursal</th>
+ 		<th>modificar</th>
+ 		<th>eliminar</th>
+ 		</tr>		
+		<tr ng-repeat="user in listaUser">		 
+			<td>{{user.id_user}}</td>
+			<td>{{user.nombre}}</td>
+			<td>{{user.apellido}}</td>
+			<td>{{user.direccion}}</td>
+			<td>{{user.mail}}</td>
+			<td>{{user.telefono}}</td>
+			<td>{{user.tipo}}</td>
+			<td>{{user.estado}}</td>
+			<td>{{user.sucursal}}</td>
+			<td><input type="button"  value="Modificar" ng-click="IrModificar(user)"></td>
+			<td><input type="button"  value="Eliminar" ng-click="IrEliminar(user)"></td>
+			<td></td>
+		</tr>
+</table>
+

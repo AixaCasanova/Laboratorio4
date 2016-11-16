@@ -8,20 +8,22 @@ angular
  
        if ($auth.isAuthenticated()) {
        
-        $rootScope.datos=$auth.getPayload();
-       //alert("pasa por aca?");
-        $rootScope.usuarioAver="Bienvenido "+ $rootScope.datos.nombre;  
- 
-        $rootScope.userAVer="Bienvenido "+$rootScope.datos.nombre;
-        if ($rootScope.datos.perfil == "administrador") {
-        //  alert("pasa por aca?");
-          console.info("si pasa por aca en el inicio!");  
+        var datos=$auth.getPayload();
+      
+        $rootScope.usuarioAver="Bienvenido "+ datos['nombre'];  
+         $rootScope.SeVe=true;
+        $rootScope.userAVer="Bienvenido "+ datos['nombre'];
+
+        if (datos['perfil'] == "administrador") {
+        
+        console.info("datos.perfil: ",datos['perfil'])
+
           $rootScope.esAdmin=true;
           $rootScope.esVend=true;
-        }else if ($rootScope.datos.perfil == "comprador") {
+        }else if (datos['perfil'] == "comprador") {
           $rootScope.esAdmin=false;
           $rootScope.esVend=false;
-        }else if ($rootScope.datos.perfil == "vendedor") {
+        }else if (datos['perfil'] == "vendedor") {
           $rootScope.esAdmin=false;         
           $rootScope.esVend=true;
         } 
@@ -164,7 +166,7 @@ angular
                           $rootScope.esVend=true;
                          }               
 
-
+                         $state.reload()
                       }else{
                         console.info("notoken",$auth.getPayload());
                         $scope.ver=true;

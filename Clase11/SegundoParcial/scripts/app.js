@@ -22,8 +22,7 @@ angular
     $stateProvider
     .state('inicio', {
       url: '/inicio',
-      templateUrl: 'index.html',
-      controller:'CtrolGeneral'
+      templateUrl: 'index.html'
     })
     .state('usuarios', {
       url: '/usuarios',

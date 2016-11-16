@@ -2,6 +2,41 @@ angular
   .module('app')
   .controller('CtrolUsuario', function($scope, $rootScope,$stateParams,data, $auth,$state, ServUsuario, i18nService, uiGridConstants) {
  
+
+  //-------------------
+
+ 
+       if ($auth.isAuthenticated()) {
+       
+        var datos=$auth.getPayload();
+      
+        $rootScope.usuarioAver="Bienvenido "+ datos['nombre'];  
+         $rootScope.SeVe=true;
+        $rootScope.userAVer="Bienvenido "+ datos['nombre'];
+
+        if (datos['perfil'] == "administrador") {
+        
+        console.info("datos.perfil: ",datos['perfil'])
+
+          $rootScope.esAdmin=true;
+          $rootScope.esVend=true;
+        }else if (datos['perfil'] == "comprador") {
+          $rootScope.esAdmin=false;
+          $rootScope.esVend=false;
+        }else if (datos['perfil'] == "vendedor") {
+          $rootScope.esAdmin=false;         
+          $rootScope.esVend=true;
+        } 
+       
+      }else{
+        console.info("llega al ctrol gral?3")
+        console.info("notoken",$auth.getPayload());
+          $rootScope.SeVe=false;
+          $rootScope.usuarioAver="";
+   
+      }
+
+ //----------------------
  
     
     $scope.gridOptionsUsuarios = {};

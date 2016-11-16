@@ -12,7 +12,7 @@ angular
 
  
     function TraerCliente(){
-     console.info("desde la factory con servicio",ServClienteBase);
+     
      return ServClienteBase.TraerCliente();
 
     };
@@ -25,13 +25,13 @@ angular
 
   
     function ModiCliente(cliente){
-     console.info("desde la factory con servicio",ServClienteBase);
+  
      return ServClienteBase.ModiCliente(cliente);
 
     };
 
      function ElimCliente(cliente){
-     console.info("desde la factory con servicio",ServClienteBase);
+     
      return ServClienteBase.ElimCliente(cliente);
 
     };

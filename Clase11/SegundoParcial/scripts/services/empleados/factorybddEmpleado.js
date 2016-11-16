@@ -30,7 +30,7 @@ angular
     function TraerListaSuc(){
         return $http.get(TraerUrl()).then(
         function (respuesta){
-        console.info("resp factory suc:",respuesta);
+ 
           return respuesta.data;
         },
         function (error){
@@ -72,7 +72,7 @@ angular
       function AltaEmpleado(cliente){
       return $http.post(TraerUrl(cliente)).then(
         function (respuesta){
-          console.info("desde factory bdd",respuesta);
+          
           return respuesta.data;
         },
         function (error){

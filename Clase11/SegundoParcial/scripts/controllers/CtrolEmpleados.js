@@ -1,8 +1,9 @@
 angular
   .module('app')
-  .controller('CtrolEmpleados', function($scope, $state, $auth ,data, ServEmpleado, $stateParams, i18nService, uiGridConstants) {
-    $scope.titulo = "Configuracion Campos";
-  
+  .controller('CtrolEmpleados', function($scope,$rootScope, $state, $auth ,data, ServEmpleado, $stateParams, i18nService, uiGridConstants) {
+ 
+   
+
     
     $scope.gridOptionsEmpleados = {};
     $scope.gridOptionsEmpleados.paginationPageSizes = [25, 50, 75];
@@ -12,28 +13,29 @@ angular
     $scope.gridOptionsEmpleados.enableFiltering = true;
     i18nService.setCurrentLang('es');
   
+
   
 
       ServEmpleado.TraerEmp().then(function(resp){
        $scope.gridOptionsEmpleados.data=resp;
-        console.info("desde constroller",resp);
-  
+         
+        $scope.listaUser=resp;
+
      });
 
       
      ServEmpleado.TraerListaSuc().then(function(resp){
           $scope.SucElegida=resp[0].nombre;
-          console.info("resp de sucurs:",resp[0].nombre);
-            
+           
             $scope.Lsucursales=resp;    
       
          });
          
       
-      console.info($stateParams);
+      
       if ($stateParams['parametro'] != null) 
       {
-        console.info("aca entra??")
+        
           var ObjRecibido=$stateParams['parametro'];
       
 
@@ -53,21 +55,18 @@ angular
 
       }else
       {
-        console.info("llego aca");
+   
         $scope.usuario={};
-        $scope.usuario.nombre="aixa";
-        $scope.usuario.apellido="casanova";
-        $scope.usuario.mail="mail@MAIL.COM";
-        $scope.usuario.dir="calle falsa 123";
+        $scope.usuario.nombre="mariano";
+        $scope.usuario.apellido="matinez";
+        $scope.usuario.mail="mariano@MAIL.COM";
+        $scope.usuario.dir="calle falsa 321";
         $scope.usuario.tel=123456;
         $scope.usuario.pass="123456";
         $scope.usuario.passRep="123456";
         $scope.usuario.estado = "H";
         $scope.usuario.tipo="vendedor";
-        
-        console.info($scope.usuario.sucursal);
-
-        console.info("llego aqui??");
+         
       $scope.usuario.sucursal=$scope.SucElegida;
 
 
@@ -87,7 +86,7 @@ angular
          $scope.usuario.sucursal=$scope.SucElegida;
           ServEmpleado.ModifEmp(JSON.stringify($scope.usuario)).then(function(resp)
             {
-                console.info("desde constroller",resp);
+               
                 $state.go("empleados");
                 
             })
@@ -105,11 +104,11 @@ angular
        $scope.AltaEmpleado=function()
       {
  
-        console.info("2do??");
+    
               $scope.usuario.sucursal=$scope.SucElegida;
           ServEmpleado.AltaEmpleado(JSON.stringify($scope.usuario)).then(function(resp)
             {
-                console.info("desde constroller",resp);
+              
           
                 $state.go("empleados");
 
@@ -124,19 +123,19 @@ angular
           $scope.usuario.quehago="elim";
             ServEmpleado.ElimEmp(JSON.stringify($scope.usuario)).then(function(resp)
             {
-              console.info("respuesta: ",resp);
+              
               $state.go("empleados");
                 
             })
         }
 
                
-       $scope.IrModificarEmp = function(parametro)
+       $scope.IrModificar = function(parametro)
       {
         $state.go("ModifEmp",{parametro:parametro});
       }
       
-       $scope.IrEliminarEmp = function(parametro)
+       $scope.IrEliminar = function(parametro)
       {
         //console.info(parametro['nombre']);
         
@@ -169,8 +168,8 @@ angular
           { field: 'sucursal', name: 'sucursal', width: 120
           ,enableFiltering: false
         },
-        { field: 'Modificar', name: 'Modificar', enableFiltering: false , width: 120, cellTemplate:'<input type="button"  value="Modificar" ng-click="grid.appScope.IrModificarEmp(row.entity)">'},
-        { field: 'Eliminar', name: 'Eliminar', enableFiltering: false , width: 120, cellTemplate:'<input type="button"  value="Eliminar" ng-click="grid.appScope.IrEliminarEmp(row.entity)">'},
+        { field: 'Modificar', name: 'Modificar', enableFiltering: false , width: 120, cellTemplate:'<input type="button"  value="Modificar" ng-click="grid.appScope.IrModificar(row.entity)">'},
+        { field: 'Eliminar', name: 'Eliminar', enableFiltering: false , width: 120, cellTemplate:'<input type="button"  value="Eliminar" ng-click="grid.appScope.IrEliminar(row.entity)">'},
         
 
 

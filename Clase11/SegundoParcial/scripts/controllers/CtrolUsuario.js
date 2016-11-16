@@ -1,7 +1,7 @@
 angular
   .module('app')
-  .controller('CtrolUsuario', function($scope,$stateParams,data, $auth,$state, ServUsuario, i18nService, uiGridConstants) {
-    $scope.titulo = "Configuracion Campos";
+  .controller('CtrolUsuario', function($scope, $rootScope,$stateParams,data, $auth,$state, ServUsuario, i18nService, uiGridConstants) {
+ 
  
     
     $scope.gridOptionsUsuarios = {};
@@ -28,6 +28,7 @@ angular
       
          });
 
+ $scope.usuario={};
     //------------------------------------
     
       if ($stateParams['parametro'] != null) 
@@ -36,7 +37,7 @@ angular
           var ObjRecibido=$stateParams['parametro'];
       
 
-            $scope.usuario={};
+            
             $scope.usuario.id_user=ObjRecibido.id_user;
             $scope.usuario.nombre=ObjRecibido.nombre;
             $scope.usuario.apellido=ObjRecibido.apellido;
@@ -44,28 +45,26 @@ angular
             $scope.usuario.dir=ObjRecibido.direccion;
             $scope.usuario.tel=ObjRecibido.telefono;
             $scope.usuario.pass=ObjRecibido.password;
-            $scope.usuario.estado = ObjRecibido.estado;
-            $scope.usuario.tipo=ObjRecibido.tipo;
+            $scope.usuario.estado=ObjRecibido.estado;
             $scope.SucElegida=ObjRecibido.sucursal;
-            console.info("suc elegida",$scope.SucElegida);
-            console.info("obj traida", ObjRecibido.sucursal);
-              console.info("obj total:", ObjRecibido);
+            $scope.TipoElegido=ObjRecibido.tipo;
+            $scope.usuario.tipo=$scope.TipoElegido;
+           
       }else
       {
-      
-        $scope.usuario={};
-        $scope.usuario.nombre="aixa";
-        $scope.usuario.apellido="casanova";
-        $scope.usuario.mail="mail@MAIL.COM";
-        $scope.usuario.dir="calle falsa 123";
+       
+        $scope.usuario.nombre="Cristina";
+        $scope.usuario.apellido="Perez";
+        $scope.usuario.mail="Cristina@MAIL.COM";
+        $scope.usuario.dir="calle falsa 999";
         $scope.usuario.tel=123456;
         $scope.usuario.pass="123456";
         $scope.usuario.passRep="123456";
         $scope.usuario.estado = "H";
-        $scope.usuario.tipo="comprador";
+        $scope.usuario.tipo="administrador";
         $scope.SucElegida="NoAplica";
         $scope.usuario.sucursal=$scope.SucElegida;
-        console.info("dsd el else",$scope.usuario.sucursal);
+         
       }
    //------------------------------------
 
@@ -94,11 +93,11 @@ angular
 
        $scope.Modif=function()
       {
-          $scope.usuario.sucursal=$scope.SucElegida;
-          console.info("desde fun modif",$scope.SucElegida);
+      
+        $scope.usuario.sucursal=$scope.SucElegida;
           ServUsuario.Modif(JSON.stringify($scope.usuario)).then(function(resp)
             {
-         
+
                 $state.go("usuarios");
                 
             })
@@ -109,7 +108,7 @@ angular
       {
           ServUsuario.Elim(JSON.stringify($scope.usuario)).then(function(resp)
             {
-                console.info("desde constroller",resp);
+    
                 $state.go("usuarios");
                 
             })
@@ -118,8 +117,9 @@ angular
 
       $scope.AltaUs=function()
       {
+
         $scope.usuario.sucursal=$scope.SucElegida;
-          ServUsuario.Alta(JSON.stringify($scope.usuario)).then(function(resp)
+        ServUsuario.Alta(JSON.stringify($scope.usuario)).then(function(resp)
             {
                 console.info("desde constroller",resp);
                 $state.go("usuarios");
@@ -145,8 +145,17 @@ angular
          { field: 'telefono', name: 'telefono', width: 120
           ,enableFiltering: false
         },
-         { field: 'tipo', name: 'tipo', width: 120
-          ,enableFiltering: false
+         { field: 'tipo', name: 'tipo', width: 120,
+          filter: {
+              type: uiGridConstants.filter.SELECT,
+              selectOptions: [
+                {value: 'administrador', label: 'administrador'},
+                {value: 'vendedor', label: 'vendedor'},
+                {value: 'comprador', label: 'comprador'}
+              ],
+            }
+        ,cellFilter: 'tipou'    
+
         },
           { field: 'estado', name: 'estado', width: 120
           ,enableFiltering: false

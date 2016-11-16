@@ -18,11 +18,12 @@ angular
     $authProvider.tokenPrefix = "Aplicacion";
     $authProvider.authHeader="data";
 
-    $urlRouterProvider.otherwise('login');
+    $urlRouterProvider.otherwise('#');
     $stateProvider
     .state('inicio', {
       url: '/inicio',
-      templateUrl: 'index.html'
+      templateUrl: 'index.html',
+      controller:'CtrolGeneral'
     })
     .state('usuarios', {
       url: '/usuarios',

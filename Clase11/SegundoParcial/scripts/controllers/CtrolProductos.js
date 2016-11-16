@@ -1,10 +1,9 @@
 angular
   .module('app')
-  .controller('CtrolProductos', function($scope, $auth,  data, $auth,$stateParams,$state, ServProducto, i18nService, uiGridConstants)
+  .controller('CtrolProductos', function($scope,$rootScope, $auth,  data, $auth,$stateParams,$state, ServProducto, i18nService, uiGridConstants)
    {
-    $scope.titulo = "Configuracion Campos";
- 
-    console.log("controller");
+
+
     
     $scope.gridOptionsProductos = {};
     $scope.gridOptionsProductos.paginationPageSizes = [25, 50, 75];
@@ -15,6 +14,7 @@ angular
         //console.info("token",$auth.getPayload());
         $scope.datos=$auth.getPayload();
         var Perf=$scope.datos.perfil;
+        $scope.per=$scope.datos.perfil;
        
     }else{
       console.info("notoken",$auth.getPayload());

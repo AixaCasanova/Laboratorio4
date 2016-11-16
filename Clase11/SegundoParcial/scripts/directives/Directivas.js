@@ -18,6 +18,15 @@ angular
       }
 
   }) 
+  .directive("dirTablaComp",function(){
+    return {
+      replace:true,
+      restrict:"MEAC",  
+      templateUrl:"templates/TablaComp.html"
+      }
+
+  }) 
+
 
   //se pueden agregar todaas las directivas que se quiera y a lo ultimo el ;
 

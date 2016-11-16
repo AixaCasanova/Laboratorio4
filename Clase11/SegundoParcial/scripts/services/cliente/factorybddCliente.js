@@ -14,7 +14,7 @@ angular
     function TraerCliente(){
       return $http.get(TraerUrl()).then(
         function (respuesta){
-          console.info("desde factory bdd ve:",respuesta.data);
+           
           return respuesta.data;
         },
         function (error){
@@ -26,7 +26,7 @@ angular
       function AltaCliente(cliente){
       return $http.post(TraerUrl(cliente)).then(
         function (respuesta){
-          console.info("desde factory bdd",respuesta);
+ 
           return respuesta.data;
         },
         function (error){
@@ -53,7 +53,7 @@ angular
     function ElimCliente(cliente){
       return $http.post(TraerUrl(cliente)).then(
         function (respuesta){
-          console.info("desde factory bdd",respuesta.data);
+           
           return respuesta.data;
         },
         function (error){

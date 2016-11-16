@@ -16,8 +16,8 @@ angular
     
 
     function TraerTodos(){
-     console.info("desde la factory con servicio",ServProductoBase);
-     return ServProductoBase.TraerTodos();
+   
+      return ServProductoBase.TraerTodos();
 
     };
 

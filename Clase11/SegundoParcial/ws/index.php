@@ -124,7 +124,7 @@ $app->post('/ModifUs/{objeto}', function ($request, $response, $args) {
     $UnCliente->password=$pers->pass;
     $dato=usuario::Modificarusuario($UnCliente);  
     $response->write(json_encode($dato));
-    //return json_encode($pers);
+    //return json_encode($UnCliente);
     return $response;
 
     

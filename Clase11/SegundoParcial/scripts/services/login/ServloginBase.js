@@ -5,7 +5,7 @@ angular
  
     var url = factorybddLogin.Api;
     var url2 = factorybddLogin.Api2;
-    console.info(url);
+     
     //Esta funcion es privada
     function TraerUrl(parametro){
       if (!parametro)
@@ -21,11 +21,10 @@ angular
     }
 
     this.TraerUnLogin=function(pers){
-      console.info("dese serloginbase:",pers);
+      
       return $http.post(TraerUrl(pers)).then(
         function (respuesta){
-          console.info("desde ServloginBase",respuesta);
-          return respuesta.data;
+                  return respuesta.data;
           
         },
         function (error){
@@ -38,7 +37,7 @@ angular
       var paramTodos="todos";
       return $http.get(TraerUrl(paramTodos)).then(
         function (respuesta){
-          console.info("desde serv usuario base",respuesta);
+           
           return respuesta.data;
           
         },

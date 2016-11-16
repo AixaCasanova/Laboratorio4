@@ -1,22 +1,14 @@
 angular.module('app')
-  .filter('sexo', function () {
-  	var sexo = {
-  		1: 'Masculino',
-  		2: 'Femenino'
+  .filter('tipou', function () {
+  	var tipou = {
+  		'administrador': 'administrador',
+  		'vendedor': 'vendedor',
+      'comprador': 'comprador'
   	}
     return function (input) {
     	if (!input)
     		return '';
-      return sexo[input];
+      return tipou[input];
     };
   })
-   .filter('sexoTP', function () {
-    var sexo = {
-      "Male": 'Masculino',
-      "Female": 'Femenino'
-    }
-    return function (input) {
-    
-      return sexo[input];
-    };
-  });
+ 

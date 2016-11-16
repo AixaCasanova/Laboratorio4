@@ -1,10 +1,10 @@
 angular
   .module('app')
-  .controller('CtrolClientes', function($scope, data, $auth ,ServCliente,$stateParams, $state, i18nService, uiGridConstants) {
-    $scope.titulo = "Configuracion Campos";
+  .controller('CtrolClientes', function($scope,$rootScope, data, $auth ,ServCliente,$stateParams, $state, i18nService, uiGridConstants) {
  
-    console.log("controller");
-    
+ 
+
+  
     $scope.gridOptionsClientes = {};
     $scope.gridOptionsClientes.paginationPageSizes = [25, 50, 75];
  
@@ -17,18 +17,15 @@ angular
 
       ServCliente.TraerCliente().then(function(resp){
        $scope.gridOptionsClientes.data=resp;
-        console.info("desde constroller",resp);
-  
+        
+        $scope.listaUser=resp;
         });
  
 
- //-------------------
 
- 
-      console.info($stateParams);
       if ($stateParams['parametro'] != null) 
       {
-        console.info("aca entra??")
+
           var ObjRecibido=$stateParams['parametro'];
       
 
@@ -44,15 +41,15 @@ angular
             $scope.usuario.tipo=ObjRecibido.tipo;
       }else
       {
-        console.info("llego aca");
+ 
         $scope.usuario={};
-        $scope.usuario.nombre="aixa";
-        $scope.usuario.apellido="casanova";
-        $scope.usuario.mail="mail@MAIL.COM";
-        $scope.usuario.dir="calle falsa 123";
+        $scope.usuario.nombre="Octavio";
+        $scope.usuario.apellido="Villegas";
+        $scope.usuario.mail="Octavio@MAIL.COM";
+        $scope.usuario.dir="calle falsa 888";
         $scope.usuario.tel=123456;
-        $scope.usuario.pass="123456";
-        $scope.usuario.passRep="123456";
+        $scope.usuario.pass="123ABC";
+        $scope.usuario.passRep="123ABC";
         $scope.usuario.estado = "H";
         $scope.usuario.tipo="comprador";
         $scope.usuario.sucursal="NoAplica";
@@ -85,7 +82,7 @@ angular
       {
           ServCliente.ModiCliente(JSON.stringify($scope.usuario)).then(function(resp)
             {
-                console.info("desde constroller",resp);
+                 
                 $state.go("clientes");
                 
             })
@@ -96,7 +93,7 @@ angular
       {
           ServCliente.ElimCliente(JSON.stringify($scope.usuario)).then(function(resp)
             {
-                console.info("desde constroller",resp);
+                
                 $state.go("clientes");
                 
             })
@@ -107,7 +104,7 @@ angular
       {
           ServCliente.AltaCliente(JSON.stringify($scope.usuario)).then(function(resp)
             {
-                console.info("desde constroller",resp);
+                 
                 $state.go("clientes");
             })
            

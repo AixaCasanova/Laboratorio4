@@ -7,8 +7,7 @@ angular
     var urlM = factorybddCliente.Api2;
     var urlE = factorybddCliente.Api3;
     var urlA = factorybddCliente.Api4;
-    console.info(url);
-    //Esta funcion es privada
+    
 
   function TraerUrl(parametro,accion){
  

@@ -1,9 +1,8 @@
 angular
   .module('app')
-  .controller('CtrolOfertas', function($scope, data, $auth, ServOferta, i18nService, uiGridConstants) {
-    $scope.titulo = "Configuracion Campos";
+  .controller('CtrolOfertas', function($scope,$rootScope, data, $auth, ServOferta, i18nService, uiGridConstants) {
  
-    console.log("controller");
+ 
     
     $scope.gridOptionsOfertas = {};
     $scope.gridOptionsOfertas.paginationPageSizes = [25, 50, 75];

@@ -12,7 +12,7 @@ $user=json_decode($datosDelModeloPorPost);
 	$token["nombre"]=$user->nombre;
 	$token["perfil"]=$user->tipo;
 	$token["iat"]=time();
-	$token["exp"]=time()+1000;
+	$token["exp"]=time()+999;
 	$token["algo"]=$user;
  
 

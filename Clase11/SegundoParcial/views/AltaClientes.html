@@ -7,6 +7,10 @@
 		Direccion:<input type="text" name="direcion" ng-model="usuario.dir" ><br><br>
 		Mail:<input type="mail" name="mail" ng-model="usuario.mail" ><br><br>
 		Telefono:<input type="number" name="telefono" ng-model="usuario.tel" ><br><br>
+		Estado:<select ng-model="usuario.estado" >
+			<option value="H">Habilitado</option>
+			<option value="D">Deshabilitado</option>
+		</select><br><br> 
 		Password:<input type="password" name="password" ng-model="usuario.pass" ><br><br>
 		Repita la password:<input type="password" name="password2" ng-model="usuario.passRep" ><br><br>
 		<input type="button" ng-click="AltaC()" style="color:black" name="AltaC" value="Dar de alta" >

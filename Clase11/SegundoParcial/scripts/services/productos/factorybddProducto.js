@@ -14,7 +14,7 @@ angular
     function TraerTodos(){
       return $http.get(TraerUrl()).then(
         function (respuesta){
-          console.info("desde factory bdd",respuesta.data);
+           
           return respuesta.data;
         },
         function (error){
@@ -31,7 +31,7 @@ angular
           return $http.post(TraerUrl(p)).then(
             function (respuesta)
             {
-              console.info("desde factory bdd",respuesta);
+             
               return respuesta.data;
             },
             function (error){
@@ -49,7 +49,7 @@ angular
           return $http.post(TraerUrl(p)).then(
             function (respuesta)
             {
-              console.info("desde factory bdd",respuesta);
+
               return respuesta.data;
             },
             function (error){
@@ -64,7 +64,7 @@ angular
           return $http.post(TraerUrl(p)).then(
             function (respuesta)
             {
-              console.info("desde factory bdd",respuesta);
+              
               return respuesta.data;
             },
             function (error){

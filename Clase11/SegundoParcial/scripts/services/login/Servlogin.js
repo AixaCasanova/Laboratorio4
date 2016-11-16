@@ -11,12 +11,12 @@ angular
  
     function TraerUnLogin(pers)
     {
-      console.info("desde servlogin",ServloginBase);
+       
       return ServloginBase.TraerUnLogin(pers);
     };
 
         function TraerTodos(){
-     console.info("desde la factory con servicio",ServloginBase);
+     
      return ServloginBase.TraerTodos();
 
     };

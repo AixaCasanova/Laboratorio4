@@ -1,4 +1,4 @@
-<div>
+<div ng-if="ver==true">
  
   <h3>Usuarios</h3>
   <input type="button" ui-sref="AltaUs" style="color:black" name="AltaUs" value="Nuevo Usuario"><br><br>
@@ -8,3 +8,4 @@
    <dir-tabla-us></dir-tabla-us>
 
 </div>
+ <div ng-if="ver!=true" id="divlogin"><center><h1>Debe loguearse!!</h1></center></div>

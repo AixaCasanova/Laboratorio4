@@ -7,7 +7,7 @@ angular
 
  
        if ($auth.isAuthenticated()) {
-       
+         $scope.ver=true;
         var datos=$auth.getPayload();
       
         $rootScope.usuarioAver="Bienvenido "+ datos['nombre'];  
@@ -33,7 +33,7 @@ angular
         console.info("notoken",$auth.getPayload());
           $rootScope.SeVe=false;
           $rootScope.usuarioAver="";
-   
+          $scope.ver=false;
       }
 
  //----------------------
